@@ -163,7 +163,8 @@ class Test_calcularPrecio(unittest.TestCase):
         fin_reserva = datetime(2015, 4, 28, 6, 14)
         tiempoTrabajo = [ini_reserva,fin_reserva]
         precio = calcularPrecio(tarifa_de_prueba, tiempoTrabajo)
-        self.assertEqual(precio,(5.4*5*24) + (7.6*2*24))        
+        self.assertEqual(precio,(5.4*5*24) + (7.6*2*24))
+                
     def testSecondsTimer(self):
         # Caso de prueba tiempo de reservacion con segundos
         tarifa_de_prueba = Tarifa(5,7)

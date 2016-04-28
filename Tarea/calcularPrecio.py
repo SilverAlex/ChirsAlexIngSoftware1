@@ -91,13 +91,13 @@ def calcularPrecio(tarifa, tiempoDeTrabajo):
             return horasTrabajoSem*tarifa.tasaDiaSemana + horasTrabajoFin*tarifa.tasaFinSemana
                                 
             
-if __name__ == '__main__':
-    tarifa_de_prueba = Tarifa(2,3)
-    ini_reserva = datetime(2015, 4, 20, 6, 0)
-    fin_reserva = datetime(2015, 4, 27, 6, 0)
-    tiempo_reserva = [ini_reserva,fin_reserva]
-    precio = calcularPrecio(tarifa_de_prueba, tiempo_reserva)
-    print(precio)
-        
+#if __name__ == '__main__':
+tarifa_de_prueba = Tarifa(2,3)
+ini_reserva = datetime(2015, 4, 20, 6, 0)
+fin_reserva = datetime(2015, 4, 27, 6, 0)
+tiempo_reserva = [ini_reserva,fin_reserva]
+precio = calcularPrecio(tarifa_de_prueba, tiempo_reserva)
+print(precio)
+    
     
     
