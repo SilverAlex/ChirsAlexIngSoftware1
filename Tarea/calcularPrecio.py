@@ -45,9 +45,9 @@ def calcularPrecio(tarifa, tiempoDeReservacionr):
             
             
 if __name__ == '__main__':
-    tarifa_de_prueba = Tarifa(10,20)
-    ini_reserva = datetime(2016, 4, 15, 23, 0)
-    fin_reserva = datetime(2016, 4, 16, 0, 59)
+    tarifa_de_prueba = Tarifa(0,0)
+    ini_reserva = datetime(2016, 4, 15, 0, 0)
+    fin_reserva = datetime(2016, 4, 16, 15, 0)
     tiempo_reserva = [ini_reserva,fin_reserva]
     print(calcularPrecio(tarifa_de_prueba,tiempo_reserva))
         
