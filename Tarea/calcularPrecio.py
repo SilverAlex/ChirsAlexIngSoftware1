@@ -49,7 +49,8 @@ def calcularPrecio(tarifa, tiempoDeTrabajo):
             if tiempoDeTrabajo[0].weekday() >= tiempoDeTrabajo[1].weekday():
                 horasTrabajoSem = 0
                 horasTrabajoFin = 0
-                while tiempoDeTrabajo[0].weekday() >= 5:
+                while (tiempoDeTrabajo[0].weekday() >= 5 and 
+                       tiempoDeTrabajo[0] <= tiempoDeTrabajo[1]):
                     tiempoDeTrabajo[0] += timedelta(0,3600)
                     horasTrabajoFin += 1
                 while (tiempoDeTrabajo[0].weekday() <= 4 and 
@@ -91,9 +92,9 @@ def calcularPrecio(tarifa, tiempoDeTrabajo):
                                 
             
 if __name__ == '__main__':
-    tarifa_de_prueba = Tarifa(1,2)
-    ini_reserva = datetime(2016, 4, 16, 16, 0)
-    fin_reserva = datetime(2016, 4, 23, 16, 0)
+    tarifa_de_prueba = Tarifa(2,3)
+    ini_reserva = datetime(2015, 4, 20, 6, 0)
+    fin_reserva = datetime(2015, 4, 27, 6, 0)
     tiempo_reserva = [ini_reserva,fin_reserva]
     precio = calcularPrecio(tarifa_de_prueba, tiempo_reserva)
     print(precio)
