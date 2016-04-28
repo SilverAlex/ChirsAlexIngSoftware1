@@ -1,12 +1,13 @@
 '''
-Created on 27 de abr. de 2016
+Christopher Flores
+10-10824
 
-@author: Silver
+Funcion calcularPrecio para la Tarea 2 de Ing. del Software (ABR-JUL 2016). 
+
 '''
+
 from decimal import Decimal
 from datetime import *
-from doctest import SKIP
-from math import ceil
 
 # Maneja una tasa para los dias de semana y otra para los fines de semana. 
 class Tarifa(object):
@@ -26,30 +27,10 @@ def calcularPrecio(tarifa, tiempoDeReservacionr):
         if tiempoDeReservacionr[1] - tiempoDeReservacionr[0] < timedelta(minutes=15):
             raise Exception("La reserva debe ser como minimo de quince (15) mintuos")
         
-        if tiempoDeReservacionr[0].weekday() < 5 and tiempoDeReservacionr[1].weekday() < 5:
-            horasReserva = (tiempoDeReservacionr[1]-tiempoDeReservacionr[0]).total_seconds()/3600
-            return ceil(horasReserva)*tarifa.tasaDiaSemana
-        elif  tiempoDeReservacionr[0].weekday() >= 5 and tiempoDeReservacionr[1].weekday() >= 5:
-            horasReserva = (tiempoDeReservacionr[1]-tiempoDeReservacionr[0]).total_seconds()/3600
-            return ceil(horasReserva)*tarifa.tasaFinSemana
-        else:
-            horasReservaSem = 0
-            while tiempoDeReservacionr[0].weekday() <= 4:
-                tiempoDeReservacionr[0] += timedelta(0,3600)
-                horasReservaSem += 1
-            horasReservaFin = 0
-            while tiempoDeReservacionr[0] <= tiempoDeReservacionr[1]:
-                tiempoDeReservacionr[0] += timedelta(0,3600)
-                horasReservaFin += 1
-            return horasReservaSem*tarifa.tasaDiaSemana + horasReservaFin*tarifa.tasaFinSemana
-            
-            
-if __name__ == '__main__':
-    tarifa_de_prueba = Tarifa(10,20)
-    ini_reserva = datetime(2016, 4, 15, 23, 0)
-    fin_reserva = datetime(2016, 4, 16, 0, 59)
-    tiempo_reserva = [ini_reserva,fin_reserva]
-    print(calcularPrecio(tarifa_de_prueba,tiempo_reserva))
         
-    
-    
+if __name__ == '__main__':
+    tarifa_de_prueba = Tarifa(5,7)
+    ini_reserva = datetime(2015, 4, 21, 6, 15)
+    fin_reserva = datetime(2015, 4, 12, 6, 29)
+    tiempo_reserva = [ini_reserva,fin_reserva]
+    calcularPrecio(tarifa_de_prueba,tiempo_reserva)
