@@ -1,6 +1,8 @@
 '''
 Created on 27 de abr. de 2016
-@author: Silver
+
+@author: Alejandro
+         Christopher
 '''
 from decimal import Decimal
 from datetime import *
@@ -48,7 +50,8 @@ def calcularPrecio(tarifa, tiempoDeTrabajo):
             if tiempoDeTrabajo[0].weekday() >= tiempoDeTrabajo[1].weekday():
                 horasTrabajoSem = 0
                 horasTrabajoFin = 0
-                while tiempoDeTrabajo[0].weekday() >= 5:
+                while (tiempoDeTrabajo[0].weekday() >= 5 and 
+                       tiempoDeTrabajo[0] <= tiempoDeTrabajo[1]):
                     tiempoDeTrabajo[0] += timedelta(0,3600)
                     horasTrabajoFin += 1
                 while (tiempoDeTrabajo[0].weekday() <= 4 and 
