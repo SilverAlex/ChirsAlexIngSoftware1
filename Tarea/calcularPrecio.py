@@ -32,22 +32,35 @@ def calcularPrecio(tarifa, tiempoDeReservacionr):
         elif  tiempoDeReservacionr[0].weekday() >= 5 and tiempoDeReservacionr[1].weekday() >= 5:
             horasReserva = (tiempoDeReservacionr[1]-tiempoDeReservacionr[0]).total_seconds()/3600
             return ceil(horasReserva)*tarifa.tasaFinSemana
-        else:
+        elif  tiempoDeReservacionr[0].weekday() < 5 and tiempoDeReservacionr[1].weekday() >= 5:
             horasReservaSem = 0
             while tiempoDeReservacionr[0].weekday() <= 4:
                 tiempoDeReservacionr[0] += timedelta(0,3600)
                 horasReservaSem += 1
             horasReservaFin = 0
+            if tiempoDeReservacionr[0] >= tiempoDeReservacionr[1]:
+                horasReservaFin += 1
             while tiempoDeReservacionr[0] <= tiempoDeReservacionr[1]:
                 tiempoDeReservacionr[0] += timedelta(0,3600)
                 horasReservaFin += 1
             return horasReservaSem*tarifa.tasaDiaSemana + horasReservaFin*tarifa.tasaFinSemana
-            
+        else:
+            horasReservaSem = 0
+            while tiempoDeReservacionr[0].weekday() != 0 :
+                tiempoDeReservacionr[0] += timedelta(0,3600)
+                horasReservaSem += 1
+            horasReservaFin = 0
+            if tiempoDeReservacionr[0] >= tiempoDeReservacionr[1]:
+                horasReservaFin += 1
+            while tiempoDeReservacionr[0] <= tiempoDeReservacionr[1]:
+                tiempoDeReservacionr[0] += timedelta(0,3600)
+                horasReservaFin += 1
+            return horasReservaSem*tarifa.tasaDiaSemana + horasReservaFin*tarifa.tasaFinSemana            
             
 if __name__ == '__main__':
-    tarifa_de_prueba = Tarifa(0,0)
-    ini_reserva = datetime(2016, 4, 15, 0, 0)
-    fin_reserva = datetime(2016, 4, 16, 15, 0)
+    tarifa_de_prueba = Tarifa(1,2)
+    ini_reserva = datetime(2016, 4, 17, 23, 45)
+    fin_reserva = datetime(2016, 4, 18, 0, 30)
     tiempo_reserva = [ini_reserva,fin_reserva]
     print(calcularPrecio(tarifa_de_prueba,tiempo_reserva))
         

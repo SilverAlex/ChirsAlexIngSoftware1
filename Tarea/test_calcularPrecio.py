@@ -7,6 +7,7 @@ import unittest
 from calcularPrecio import * 
 from datetime import datetime
 from decimal import Decimal
+from virtualenv import maxint
 
 class Test_calcularPrecio(unittest.TestCase):
 
@@ -62,15 +63,23 @@ class Test_calcularPrecio(unittest.TestCase):
         self.assertEqual(calcularPrecio(aTarifa, tiempo_reserva), 2,
                           "El precio debe ser 2 para t=1 y tiempo = 15 ")
     
-        def test15MTimeTarifa1_2CasoBorde(self):
+    def test15MTimeTarifa1_2CasoBorde(self):
         # Caso de prueba tiempo de reservacion = (15) minutos, tarifa pequenia
-            aTarifa = Tarifa(1,2)
-            ini_reserva = datetime(2016, 4, 15, 23, 45)
-            fin_reserva = datetime(2016, 4, 16, 0, 0)
-            tiempo_reserva = [ini_reserva,fin_reserva]
-            self.assertEqual(calcularPrecio(aTarifa, tiempo_reserva), 3,
+        aTarifa = Tarifa(1,2)
+        ini_reserva = datetime(2016, 4, 15, 23, 46)
+        fin_reserva = datetime(2016, 4, 16, 0, 1)
+        tiempo_reserva = [ini_reserva,fin_reserva]
+        self.assertEqual(calcularPrecio(aTarifa, tiempo_reserva), 3,
                               "El precio debe ser 2 para t=1 y tiempo = 15 ")
-                        
+
+
+    def testMaxTarifa15MTime(self):
+        aTarifa = Tarifa(maxint,maxint)
+        ini_reserva = datetime(2016, 4, 15, 0, 0)
+        fin_reserva = datetime(2016, 4, 15, 0, 15)
+        tiempo_reserva = [ini_reserva,fin_reserva]
+        self.assertEqual(calcularPrecio(aTarifa,tiempo_reserva), maxint, "El resultado debio ser maxint")
+                                    
     def test7DaysTimer(self):
         # Caso de prueba tiempo de reservacion = (7) dias con tarifa decimal
         pass
