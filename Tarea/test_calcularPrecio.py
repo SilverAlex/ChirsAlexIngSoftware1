@@ -20,10 +20,11 @@ class Test_calcularPrecio(unittest.TestCase):
     def test0Tarifa(self):
         # Caso de prueba Tarifa(0,0)
         tarifa_de_prueba = Tarifa(0,0)
-        ini_reserva = datetime(2015, 4, 21, 6, 15)
-        fin_reserva = datetime(2015, 4, 28, 6, 10)
+        ini_reserva = datetime(2016, 4, 21, 6, 15)
+        fin_reserva = datetime(2016, 4, 28, 6, 10)
         tiempo_reserva = [ini_reserva,fin_reserva]
         precio = calcularPrecio(tarifa_de_prueba, tiempo_reserva)
+        print(precio)
         self.assertEqual(precio, 0)  
     
     def test14MinTimer(self):
@@ -113,10 +114,10 @@ class Test_calcularPrecio(unittest.TestCase):
         # Caso de prueba Tarifa decimal 2
         tarifa_de_prueba = Tarifa(5.4,7.6)
         ini_reserva = datetime(2015, 4, 21, 6, 15)
-        fin_reserva = datetime(2015, 4, 28, 6, 15)
+        fin_reserva = datetime(2015, 4, 28, 6, 14)
         tiempo_reserva = [ini_reserva,fin_reserva]
         precio = calcularPrecio(tarifa_de_prueba, tiempo_reserva)
-        self.assertEqual(precio,(Decimal((5.4*5*24)+ 7.6*2*24).quantize(Decimal('1.00'))))
+        self.assertEqual(precio,((5.4*5*24)+ 7.6*2*24))
         
     def testSecondsTimer(self):
         # Caso de prueba tiempo de reservacion con segundos
@@ -124,14 +125,14 @@ class Test_calcularPrecio(unittest.TestCase):
         ini_reserva = datetime(2015, 4, 21, 6, 15, 2)
         fin_reserva = datetime(2015, 4, 22, 6, 15, 3)
         tiempo_reserva = [ini_reserva,fin_reserva]
-        calcularPrecio(tarifa_de_prueba, tiempo_reserva)
+        
         self.assertRaises(Exception,calcularPrecio,tarifa_de_prueba, tiempo_reserva)
 
     def testBigTarifa(self):
         # Caso de prueba tarifa muy grande
         tarifa_de_prueba = Tarifa(2**31,2**64)
         ini_reserva = datetime(2015, 4, 21, 6, 15)
-        fin_reserva = datetime(2015, 4, 28, 6, 15)
+        fin_reserva = datetime(2015, 4, 28, 6, 14)
         tiempo_reserva = [ini_reserva,fin_reserva]
         precio = calcularPrecio(tarifa_de_prueba, tiempo_reserva)
         self.assertEqual(precio, (((2**31)*5*24) + (2**64)*2*24))
